@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  margin: 0;
+  padding: 0;
+}
+.page
+{
+   @apply ml-[50px] w-full
+}
+.nav {
+  @apply flex items-center justify-between px-10 h-[70px];
+}
+
+.color {
+  @apply text-red-500; /* or text-red-600 */
+}
+
+.mov {
+  @apply flex gap-10; /* 40px = 2.5rem = gap-10 */
+}
+h1 {
+  @apply text-4xl md:text-6xl font-bold;
+}
+
+h2 {
+  @apply text-xl md:text-3xl font-semibold;
+}
+
+p {
+  @apply text-base md:text-lg;
+}
+
+.input {
+  @apply block text-base mb-8 border w-full px-2 py-4 rounded focus:outline-none focus:ring-2 focus:ring-orange-500;
+}
+.loginbuten {
+  @apply border-2 border-indigo-900 py-1 w-full
+}
