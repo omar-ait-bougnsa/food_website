@@ -1,6 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
-
+import jwt from 'jsonwebtoken';
 const prisma = new PrismaClient();
 
 export async function handleRegister(req, res) {
@@ -21,6 +21,8 @@ export async function handleRegister(req, res) {
         age: 12,
       },
     });
+    const token = jwt.sign({userId: user.id, email: user.email}, "qwertyuyiuyuiyerfryegbf", { expiresIn: "1d" })
+    res.cookie('token',token, { httpOnly : true, secure : false,maxAge : 24 * 60 * 60 * 1000,sameSite: 'strict' })
     return res.status(201).json({username: user.username,email : user.email,id : user.id,});
   }
   catch (err) {

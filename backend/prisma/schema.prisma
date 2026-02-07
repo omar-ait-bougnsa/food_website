@@ -16,3 +16,13 @@ model User {
   age      Int?
 }
 
+model Product{
+  id        Int   @id @default(autoincrement())
+  name      String @unique
+  description String
+  price       Int
+  category    String
+  image       String
+  availability Boolean
+}
+
