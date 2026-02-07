@@ -1,8 +1,21 @@
 import { PrismaClient } from "@prisma/client";
-
+import path from "path";
+import multer from "multer";
 
 const prisma = new PrismaClient();
 
+const storage = multer.diskStorage({
+    destination : (req,file,cb) =>
+    {
+        cb(null, 'image/');
+    },
+    filename : (req,file,cb) =>
+    {
+        const filename = Date.now() + '-' + file.originalname
+        cb(null, filename);
+    }
+})
+export const upload = multer({ storage: storage });
 export function getproducts(req,res)
 {
 
@@ -11,7 +24,8 @@ export function getproducts(req,res)
 export async function postProduct(req,res)
 {
     const products = req.body;
-    if (!products.name || !products.description || !products.price || !products.category || !products.image || !products.availability)
+    console.log("products = ",products)
+    if (!products.name || !products.description || !products.price || !products.category ||!products.availability)
         return res.status(401).json({message : "inavlid productes"})
     console.log(products)
     try
@@ -22,7 +36,7 @@ export async function postProduct(req,res)
         description: products.description,
         price : parseInt(products.price),
         category : products.category,
-        image : products.image,
+        image : req.file.filename,
         availability : true,
         },
         });
