@@ -1,7 +1,6 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import "./index.css";
 import Home from "./Home";
-import Contact from "./contact";
 import Menu from "./menu";
 import Sing from "./sign";
 
